@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    ports:
+      - "9898:9898"
+    depends_on:
+      - "db"
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
