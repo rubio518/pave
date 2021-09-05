@@ -46,4 +46,4 @@ async def normalize_merchant(
     background_tasks.add_task(
         normalize_merchant_heuristic, tx, client_id, request_id
         )
-    return request_id
+    return {"request_id": request_id}
