@@ -1,9 +1,17 @@
+import time
 from ..dto.interfaces import Webhook
 from redis import Redis
 import psycopg2
 
-
-conn = psycopg2.connect(
+try:
+    conn = psycopg2.connect(
+        database="postgres", user="postgres", password="secret",
+        host="db", port="5432"
+    )
+except Exception as e:
+    print(e)
+    time.sleep(1)
+    conn = psycopg2.connect(
         database="postgres", user="postgres", password="secret",
         host="db", port="5432"
     )
