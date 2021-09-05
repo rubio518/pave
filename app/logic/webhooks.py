@@ -35,11 +35,10 @@ def get_webhook(client_id: str) -> Webhook:
     if(wh):
         return wh
     else:
-        print(client_id)
         cur.execute(
             "SELECT url FROM public.webhooks WHERE client_id = %s",
             (client_id,))
-        wh_from_db = cur.fetchone()[0]
-        if(wh_from_db):
-            redis_con.set(client_id, wh_from_db)
-            return wh_from_db
+        wh_from_db = cur.fetchone()
+        if(wh_from_db is not None):
+            redis_con.set(client_id, wh_from_db[0])
+            return wh_from_db[0]
