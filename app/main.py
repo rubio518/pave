@@ -23,7 +23,7 @@ def normalize_merchant_heuristic(
     purpose to reflect the slowness of a real-world implementation.
     """
     match = None
-    for _ in range(20_000):
+    for _ in range(20_000_000):
         match = re.search("Netflix", tx.description)
 
     if match:
